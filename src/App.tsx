@@ -207,18 +207,18 @@ function App() {
     for (let i = 0; i < steps.length; ++i) {
       _scores.push([0, 0]);
       let _itemValues = [];
-      for (let j = 0; j < steps[i].options.length; ++j)
-        _itemValues.push([0, 0]);
-      // for (let j = 0; j < steps[i].options.length; ++j) {
-      //   _itemValues.push([
-      //     Math.floor(Math.random() * 101),
-      //     Math.floor(Math.random() * 101),
-      //   ]);
-      // }
-      // for (let j = 0; j < steps[i].options.length; ++j) {
-      //   _scores[i][0] += _itemValues[j][0];
-      //   _scores[i][1] += _itemValues[j][1];
-      // }
+      // for (let j = 0; j < steps[i].options.length; ++j)
+      //   _itemValues.push([0, 0]);
+      for (let j = 0; j < steps[i].options.length; ++j) {
+        _itemValues.push([
+          Math.floor(Math.random() * 51),
+          Math.floor(Math.random() * 51),
+        ]);
+      }
+      for (let j = 0; j < steps[i].options.length; ++j) {
+        _scores[i][0] += _itemValues[j][0];
+        _scores[i][1] += _itemValues[j][1];
+      }
       _optionValues.push(_itemValues);
     }
     setScores([..._scores]);
@@ -229,10 +229,10 @@ function App() {
   const maxSteps = steps.length;
 
   const handleNext = () => {
-    if (scores[activeStep][0] !== 100 || scores[activeStep][1] !== 100)
-      alert("Now and Future total score must be exactly 100");
-    else setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    // if (scores[activeStep][0] !== 100 || scores[activeStep][1] !== 100)
+    //   alert("Now and Future total score must be exactly 100");
+    // else setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
@@ -431,59 +431,68 @@ function App() {
             <Box sx={style}>
               <Typography>Email: {email}</Typography>
               <Typography mb={1}>Name: {name}</Typography>
-              <Plot
-                data={data}
-                layout={{
-                  polar4: {
-                    domain: {
-                      x: [0, 1],
-                      y: [0, 1],
-                    },
-                    radialaxis: {
-                      visible: true,
-                      range: [0, 100],
-                    },
-                    angularaxis: {
-                      tickvals: [45, 135, 225, 315],
-                      ticktext: ["Create", "Collaborate", "Control", "Compete"],
-                      tickfont: {
-                        size: 36,
-                        color: "red",
-                        family: "Courier New, monospace",
+              <Box>
+                <Plot
+                  data={data}
+                  layout={{
+                    width: 1200,
+                    height: 600,
+                    polar4: {
+                      domain: {
+                        x: [0, 1],
+                        y: [0, 1],
+                      },
+                      radialaxis: {
+                        visible: true,
+                        range: [0, 50],
+                      },
+                      angularaxis: {
+                        tickvals: [45, 135, 225, 315],
+                        ticktext: [
+                          "Create",
+                          "Collaborate",
+                          "Control",
+                          "Compete",
+                        ],
+                        tickfont: {
+                          size: 36,
+                          color: "red",
+                          family: "Courier New, monospace",
+                        },
                       },
                     },
-                  },
-                  legend: {
-                    x: 1,
-                    y: 1,
-                  },
-                  showlegend: false,
-                  shapes: [
-                    {
-                      type: "line",
-                      x0: 0.5,
-                      y0: 0,
-                      x1: 0.5,
-                      y1: 1,
-                      line: {
-                        color: "black",
-                        width: 1,
-                      },
+                    legend: {
+                      x: 1,
+                      y: 1,
                     },
-                    {
-                      type: "line",
-                      x0: 0.25,
-                      y0: 0.5,
-                      x1: 0.75,
-                      y1: 0.5,
-                      line: {
-                        color: "black",
-                        width: 1,
+                    showlegend: false,
+                    shapes: [
+                      {
+                        type: "line",
+                        x0: 0.5,
+                        y0: 0,
+                        x1: 0.5,
+                        y1: 1,
+                        line: {
+                          color: "black",
+                          width: 1,
+                        },
                       },
-                    },
-                  ],
-                }}
-              />
+                      {
+                        type: "line",
+                        x0: 0.25,
+                        y0: 0.5,
+                        x1: 0.75,
+                        y1: 0.5,
+                        line: {
+                          color: "black",
+                          width: 1,
+                        },
+                      },
+                    ],
+                  }}
+                />
+              </Box>
             </Box>
           </Fade>
         </Modal>
