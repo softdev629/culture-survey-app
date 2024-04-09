@@ -207,18 +207,18 @@ function App() {
     for (let i = 0; i < steps.length; ++i) {
       _scores.push([0, 0]);
       let _itemValues = [];
-      // for (let j = 0; j < steps[i].options.length; ++j)
-      //   _itemValues.push([0, 0]);
-      for (let j = 0; j < steps[i].options.length; ++j) {
-        _itemValues.push([
-          Math.floor(Math.random() * 51),
-          Math.floor(Math.random() * 51),
-        ]);
-      }
-      for (let j = 0; j < steps[i].options.length; ++j) {
-        _scores[i][0] += _itemValues[j][0];
-        _scores[i][1] += _itemValues[j][1];
-      }
+      for (let j = 0; j < steps[i].options.length; ++j)
+        _itemValues.push([0, 0]);
+      // for (let j = 0; j < steps[i].options.length; ++j) {
+      //   _itemValues.push([
+      //     Math.floor(Math.random() * 51),
+      //     Math.floor(Math.random() * 51),
+      //   ]);
+      // }
+      // for (let j = 0; j < steps[i].options.length; ++j) {
+      //   _scores[i][0] += _itemValues[j][0];
+      //   _scores[i][1] += _itemValues[j][1];
+      // }
       _optionValues.push(_itemValues);
     }
     setScores([..._scores]);
@@ -229,10 +229,10 @@ function App() {
   const maxSteps = steps.length;
 
   const handleNext = () => {
-    // if (scores[activeStep][0] !== 100 || scores[activeStep][1] !== 100)
-    //   alert("Now and Future total score must be exactly 100");
-    // else setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (scores[activeStep][0] !== 100 || scores[activeStep][1] !== 100)
+      alert("Now and Future total score must be exactly 100");
+    else setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
